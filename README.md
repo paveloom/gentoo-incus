@@ -1,5 +1,10 @@
 # Gentoo test environment setup
 
+Git mirrors:
+- [Codeberg](https://codeberg.org/paveloom/gentoo-incus)
+- [GitHub](https://github.com/paveloom/gentoo-incus)
+- [GitLab](https://gitlab.com/paveloom-g/personal/gentoo/incus)
+
 Assumptions:
 - There is only one user on the system making use of this setup, the developer
 - The developer is only interested in using the [main ebuild repository](https://wiki.gentoo.org/wiki/Ebuild_repository#The_Gentoo_ebuild_repository) and the [GURU](https://wiki.gentoo.org/wiki/Project:GURU) repository
