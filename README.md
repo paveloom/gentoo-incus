@@ -20,91 +20,91 @@ Commands starting with `#` should be run as the root user, while commands starti
 
 1. As the root user, create project `gentoo`:
 
-```console
-# incus project create gentoo < project.yaml
-```
+   ```console
+   # incus project create gentoo < project.yaml
+   ```
 
 2. Switch to the project:
 
-```console
-# incus project switch gentoo
-```
+   ```console
+   # incus project switch gentoo
+   ```
 
 3. Create network `incusbr-gentoo`:
 
-```console
-# incus network create incusbr-gentoo < network.yaml
-```
+   ```console
+   # incus network create incusbr-gentoo < network.yaml
+   ```
 
 4. Edit the default profile:
 
-```console
-# incus profile edit default < profile.yaml
-```
+   ```console
+   # incus profile edit default < profile.yaml
+   ```
 
 5. Allow other clients to use the project.
 
    5.1 Find the fingerprint of the client in the output of
 
-   ```console
-   # incus config trust list
-   ```
+      ```console
+      # incus config trust list
+      ```
 
    5.2 Add the project to the `projects` list in the trusted client configuration.
 
-   Run
+      Run
 
-   ```console
-   # incus config trust edit <fingerprint>
-   ```
+      ```console
+      # incus config trust edit <fingerprint>
+      ```
 
-   Here's an example of the related configuration snippet:
+      Here's an example of the related configuration snippet:
 
-   ```yaml
-   # <...>
-   projects:
-   - user-1000
-   - gentoo
-   # <...>
-   ```
+      ```yaml
+      # <...>
+      projects:
+      - user-1000
+      - gentoo
+      # <...>
+      ```
 
 6. Mount the ebuild repositories and the Portage configuration from this repository under `/mnt/gentoo`.
 
-Here's an example of doing it manually:
+   Here's an example of doing it manually:
 
-```console
-# mount -m --bind "$(pwd)/portage" /mnt/gentoo/portage
-# mount -m --bind /path/to/gentoo /mnt/gentoo/gentoo
-# mount -m --bind /path/to/guru /mnt/gentoo/guru
-```
+   ```console
+   # mount -m --bind "$(pwd)/portage" /mnt/gentoo/portage
+   # mount -m --bind /path/to/gentoo /mnt/gentoo/gentoo
+   # mount -m --bind /path/to/guru /mnt/gentoo/guru
+   ```
 
-Here's an example of doing it via `/etc/fstab` (for persistence):
+   Here's an example of doing it via `/etc/fstab` (for persistence):
 
-```fstab
-/path/to/gentoo     /mnt/gentoo/gentoo     auto    bind,X-mount.mkdir
-/path/to/guru       /mnt/gentoo/guru       auto    bind,X-mount.mkdir
-/path/to/portage    /mnt/gentoo/portage    auto    bind,X-mount.mkdir
-```
+   ```fstab
+   /path/to/gentoo     /mnt/gentoo/gentoo     auto    bind,X-mount.mkdir
+   /path/to/guru       /mnt/gentoo/guru       auto    bind,X-mount.mkdir
+   /path/to/portage    /mnt/gentoo/portage    auto    bind,X-mount.mkdir
+   ```
 
 7. Now, as the user, switch to the `gentoo` project:
 
-```console
-$ incus project switch gentoo
-```
+   ```console
+   $ incus project switch gentoo
+   ```
 
 8. Launch a Gentoo container.
 
-For example,
+   For example,
 
-```console
-$ incus launch images:gentoo/systemd gentoo
-```
+   ```console
+   $ incus launch images:gentoo/systemd gentoo
+   ```
 
 9. Enter a login shell in the container:
 
-```console
-$ incus shell gentoo
-```
+   ```console
+   $ incus shell gentoo
+   ```
 
 From here on out the developer is free to use the system container as a clean Gentoo test environment.
 
