@@ -44,29 +44,29 @@ Commands starting with `#` should be run as the root user, while commands starti
 
 5. Allow other clients to use the project.
 
-5.1 Find the fingerprint of the client in the output of
+   5.1 Find the fingerprint of the client in the output of
 
-```console
-# incus config trust list
-```
+   ```console
+   # incus config trust list
+   ```
 
-5.2 Add the project to the `projects` list in the trusted client configuration.
+   5.2 Add the project to the `projects` list in the trusted client configuration.
 
-Run
+   Run
 
-```console
-# incus config trust edit <fingerprint>
-```
+   ```console
+   # incus config trust edit <fingerprint>
+   ```
 
-Here's an example of the related configuration snippet:
+   Here's an example of the related configuration snippet:
 
-```yaml
-# <...>
-projects:
-- user-1000
-- gentoo
-# <...>
-```
+   ```yaml
+   # <...>
+   projects:
+   - user-1000
+   - gentoo
+   # <...>
+   ```
 
 6. Mount the ebuild repositories and the Portage configuration from this repository under `/mnt/gentoo`.
 
