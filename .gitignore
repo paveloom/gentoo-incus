@@ -1,0 +1,2 @@
+portage/postsync.d/*
+!portage/postsync.d/10-egencache.bash

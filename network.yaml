@@ -1,0 +1,9 @@
+config:
+  ipv4.address: auto
+  ipv4.nat: "true"
+  ipv6.address: auto
+  ipv6.nat: "true"
+description: "Network for project gentoo"
+name: incusbr-gentoo
+type: bridge
+project: default

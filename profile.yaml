@@ -1,0 +1,38 @@
+config: {}
+description: Default Gentoo profile
+devices:
+  eth0:
+    name: eth0
+    network: incusbr-gentoo
+    type: nic
+  root:
+    path: /
+    pool: default
+    type: disk
+  portage:
+    path: /etc/portage
+    source: /mnt/gentoo/portage
+    type: disk
+    shift: true
+  gentoo:
+    path: /var/db/repos/gentoo
+    source: /mnt/gentoo/gentoo
+    type: disk
+    shift: true
+  guru:
+    path: /var/db/repos/guru
+    source: /mnt/gentoo/guru
+    type: disk
+    shift: true
+  pkgdir:
+    path: /var/cache/binpkgs
+    source: /var/cache/binpkgs
+    type: disk
+    shift: true
+  distdir:
+    path: /var/cache/distfiles
+    source: /var/cache/distfiles
+    type: disk
+    shift: true
+name: default
+project: gentoo

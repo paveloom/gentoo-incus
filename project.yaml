@@ -1,0 +1,12 @@
+config:
+  features.images: "true"
+  features.networks: "false"
+  features.networks.zones: "true"
+  features.profiles: "true"
+  features.storage.buckets: "true"
+  features.storage.volumes: "true"
+  restricted: "true"
+  restricted.devices.disk: "allow"
+  restricted.devices.disk.paths: ""
+  restricted.networks.access: "incusbr-gentoo"
+name: gentoo
