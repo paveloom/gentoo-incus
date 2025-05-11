@@ -10,6 +10,8 @@ Assumptions:
 - The developer is only interested in using the [main ebuild repository](https://wiki.gentoo.org/wiki/Ebuild_repository#The_Gentoo_ebuild_repository) and the [GURU](https://wiki.gentoo.org/wiki/Project:GURU) repository
 - The developer has the aforementioned repositories checked out locally
 - The developer is willing to share the binary packages between the host system and guest systems
+- The developer's non-root user's UID (`id -u`) and GID (`id -g`) are 1000 both
+- The developer is using a Wayland compositor on the host system
 
 Requirements:
 - [Incus](https://linuxcontainers.org/incus/)
@@ -86,13 +88,20 @@ Commands starting with `#` should be run as the root user, while commands starti
    /path/to/portage    /mnt/gentoo/portage    auto    bind,X-mount.mkdir
    ```
 
-7. Now, as the user, switch to the `gentoo` project:
+7. Copy the files for `root`'s and `user`'s home directories:
+
+   ```console
+   incus file push -v home/root/* gentoo/root/
+   incus file push -v home/user/.* gentoo/home/user/
+   ```
+
+8. Now, as the user, switch to the `gentoo` project:
 
    ```console
    $ incus project switch gentoo
    ```
 
-8. Launch a Gentoo container.
+9. Launch a Gentoo container.
 
    For example,
 
@@ -100,13 +109,25 @@ Commands starting with `#` should be run as the root user, while commands starti
    $ incus launch images:gentoo/systemd gentoo
    ```
 
-9. Enter a login shell in the container:
+10. Enter the root user's login shell in the container:
 
    ```console
    $ incus shell gentoo
    ```
 
+11. Run the `setup_user.bash` script in the `/root` directory to create the user `user`:
+
+    ```console
+    # ./setup_user.bash
+    ```
+
 From here on out the developer is free to use the system container as a clean Gentoo test environment.
+
+To enter the login shell as the non-root user, run
+
+```console
+$ incus exec gentoo -- su -l user
+```
 
 # Acknowledgements
 

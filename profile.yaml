@@ -9,6 +9,15 @@ devices:
     type: disk
     path: /
     pool: default
+  gpu:
+    type: gpu
+    uid: 1000
+    gid: 1000
+  xdg_runtime_dir:
+    type: disk
+    path: /home/user/.xdg_runtime_dir
+    source: /run/user/1000
+    shift: true
   portage:
     type: disk
     path: /etc/portage

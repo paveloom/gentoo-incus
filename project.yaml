@@ -8,5 +8,6 @@ config:
   restricted: "true"
   restricted.devices.disk: "allow"
   restricted.devices.disk.paths: ""
+  restricted.devices.gpu: "allow"
   restricted.networks.access: "incusbr-gentoo"
 name: gentoo
