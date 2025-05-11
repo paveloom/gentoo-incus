@@ -1,2 +1,10 @@
 portage/postsync.d/*
 !portage/postsync.d/10-egencache.bash
+
+portage/env
+portage/package.accept_keywords
+portage/package.env
+portage/package.mask
+portage/package.use
+portage/profile
+portage/savedconfig
