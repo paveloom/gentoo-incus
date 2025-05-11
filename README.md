@@ -91,8 +91,8 @@ Commands starting with `#` should be run as the root user, while commands starti
 7. Copy the files for `root`'s and `user`'s home directories:
 
    ```console
-   incus file push -v home/root/* gentoo/root/
-   incus file push -v home/user/.* gentoo/home/user/
+   # incus file push -v home/root/* gentoo/root/
+   # incus file push -v home/user/.* gentoo/home/user/
    ```
 
 8. Now, as the user, switch to the `gentoo` project:
@@ -150,8 +150,8 @@ Build the atom without creating a binary package for it:
 In the case an unwanted binary package exists (but it is not merged), delete it and fix the index:
 
 ```console
-rm -rf /var/cache/binpkgs/category/name/
-emaint binhost --fix
+# rm -rf /var/cache/binpkgs/category/name/
+# emaint binhost --fix
 ```
 
 # GUI applications
