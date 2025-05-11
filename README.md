@@ -115,10 +115,10 @@ Commands starting with `#` should be run as the root user, while commands starti
    $ incus shell gentoo
    ```
 
-11. Run the `setup_user.bash` script in the `/root` directory to create the user `user`:
+11. Run the `add_user.bash` script in the `/root` directory to create the user `user`:
 
     ```console
-    # ./setup_user.bash
+    # ./add_user.bash
     ```
 
 From here on out the developer is free to use the system container as a clean Gentoo test environment.
@@ -153,6 +153,12 @@ In the case an unwanted binary package exists (but it is not merged), delete it 
 rm -rf /var/cache/binpkgs/category/name/
 emaint binhost --fix
 ```
+
+# GUI applications
+
+To make use of the host's GPU, make sure that the non-root user on the host system and the non-root user inside the container have the same UIDs (check via `id -u`) and GIDs (check via `id -g`). The configuration in this repository assumes that both numbers are equal to 1000, as this is commonly the default for the first user on most systems. The user `user` must be added after the container is created (can be done via the [`add_user.bash`](./home/root/add_user.bash) script). The GUI applications are supposed to be launched preferably via that non-root user.
+
+The configuration also assumes that the host's non-root user uses a Wayland compositor, thus assuming that the compositor is listening at the `$XDG_RUNTIME_DIR/wayland-0` socket. The value of `$XDG_RUNTIME_DIR` is assumed to be `/run/user/1000`, and this directory is bind mounted to the container by default. A custom personal initialization file for Bash (see [`.bash_profile`](./home/user/.bash_profile)) mush be copied into the container's non-root user's home directory to override the default value of that environment variable, thus making the Wayland compositor reachable from within.
 
 # Acknowledgements
 
