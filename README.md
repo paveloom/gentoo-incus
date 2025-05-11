@@ -44,13 +44,13 @@ Commands starting with `#` should be run as the root user, while commands starti
 
 5. Allow other clients to use the project.
 
-   5.1 Find the fingerprint of the client in the output of
+   1. Find the fingerprint of the client in the output of
 
       ```console
       # incus config trust list
       ```
 
-   5.2 Add the project to the `projects` list in the trusted client configuration.
+   2. Add the project to the `projects` list in the trusted client configuration.
 
       Run
 
