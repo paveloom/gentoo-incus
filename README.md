@@ -129,6 +129,31 @@ To enter the login shell as the non-root user, run
 $ incus exec gentoo -- su -l user
 ```
 
+# Binary packages
+
+Note that the default Portage configuration in this repository makes the package manager create binary packages and share them with the host system. See the [official guide](https://wiki.gentoo.org/wiki/Binary_package_guide) for the details on how it works.
+
+Here are some commands that can be useful when working on a new ebuild.
+
+Build only the dependencies of the atom using binary packages where possible:
+
+```console
+# emerge -o atom
+```
+
+Build the atom without creating a binary package for it:
+
+```console
+# emerge --buildpkg=n atom
+```
+
+In the case an unwanted binary package exists (but it is not merged), delete it and fix the index:
+
+```console
+rm -rf /var/cache/binpkgs/category/name/
+emaint binhost --fix
+```
+
 # Acknowledgements
 
 This set of instructions is mostly a bare bones reimplementation of the instructions on the [Incus/Gentoo Github pullrequest testing](https://wiki.gentoo.org/wiki/Incus/Gentoo_Github_pullrequest_testing) page.
