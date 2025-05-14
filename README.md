@@ -163,3 +163,5 @@ The configuration also assumes that the host's non-root user uses a Wayland comp
 # Acknowledgements
 
 This set of instructions is mostly a bare bones reimplementation of the instructions on the [Incus/Gentoo Github pullrequest testing](https://wiki.gentoo.org/wiki/Incus/Gentoo_Github_pullrequest_testing) page.
+
+The [`repo.postsync.d`](./portage/repo.postsync.d) scripts are slightly modified versions of the [hasufell's scripts](https://github.com/hasufell/portage-gentoo-git-config).
