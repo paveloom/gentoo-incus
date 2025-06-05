@@ -70,12 +70,11 @@ Commands starting with `#` should be run as the root user, while commands starti
       # <...>
       ```
 
-6. Mount the ebuild repositories and the Portage configuration from this repository under `/mnt/gentoo`.
+6. Mount the ebuild repositories under `/mnt/gentoo`.
 
    Here's an example of doing it manually:
 
    ```console
-   # mount -m --bind "$(pwd)/portage" /mnt/gentoo/portage
    # mount -m --bind /path/to/gentoo /mnt/gentoo/gentoo
    # mount -m --bind /path/to/guru /mnt/gentoo/guru
    ```
@@ -85,14 +84,14 @@ Commands starting with `#` should be run as the root user, while commands starti
    ```fstab
    /path/to/gentoo     /mnt/gentoo/gentoo     auto    bind,X-mount.mkdir
    /path/to/guru       /mnt/gentoo/guru       auto    bind,X-mount.mkdir
-   /path/to/portage    /mnt/gentoo/portage    auto    bind,X-mount.mkdir
    ```
 
-7. Copy the files for `root`'s and `user`'s home directories:
+7. Copy the configuration files:
 
    ```console
-   # incus file push -v home/root/* gentoo/root/
-   # incus file push -v home/user/.* gentoo/home/user/
+   # incus file push -prv home/root/* gentoo/root/
+   # incus file push -prv home/user/.* gentoo/home/user/
+   # incus file push -prv portage/* master/etc/portage/
    ```
 
 8. Now, as the user, switch to the `gentoo` project:
