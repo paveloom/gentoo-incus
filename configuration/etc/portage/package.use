@@ -1,0 +1,16 @@
+# required by x11-libs/gtk+-3.24.49::gentoo
+# required by x11-themes/adwaita-icon-theme-legacy-46.2::gentoo
+# required by x11-themes/adwaita-icon-theme-47.0::gentoo
+>=x11-libs/cairo-1.18.4-r1 X
+
+x11-libs/gtk+:3 wayland
+
+# required by x11-libs/gtk+-3.24.49::gentoo[wayland]
+# required by net-p2p/fopnu-1.67::guru
+# required by fopnu (argument)
+>=media-libs/mesa-25.1.1 wayland
+
+x11-libs/libxkbcommon X wayland
+llvm-core/llvm xml
+
+media-libs/mesa -llvm_slot_19 llvm_slot_20

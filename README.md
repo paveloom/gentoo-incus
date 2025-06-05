@@ -89,9 +89,7 @@ Commands starting with `#` should be run as the root user, while commands starti
 7. Copy the configuration files:
 
    ```console
-   # incus file push -prv home/root/* gentoo/root/
-   # incus file push -prv home/user/.* gentoo/home/user/
-   # incus file push -prv portage/* master/etc/portage/
+   # incus file push -prv configuration/* gentoo/
    ```
 
 8. Now, as the user, switch to the `gentoo` project:
