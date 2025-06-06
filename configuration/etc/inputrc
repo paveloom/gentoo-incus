@@ -1,0 +1,4 @@
+# /etc/inputrc: initialization file for readline
+
+# Kill the word behind the point
+"\C-H": backward-kill-word
