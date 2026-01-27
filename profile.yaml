@@ -1,4 +1,5 @@
-config: {}
+config:
+  boot.autostart: "false"
 description: Default Gentoo profile
 devices:
   eth0:
