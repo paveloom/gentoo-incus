@@ -118,9 +118,9 @@ starting with `$` should be run as a non-root user.
 
 10. Enter the root user's login shell in the container:
 
-   ```console
-   $ incus shell gentoo
-   ```
+    ```console
+    $ incus shell gentoo
+    ```
 
 11. Run the `add_user.bash` script in the `/root` directory to create the user `user`:
 
