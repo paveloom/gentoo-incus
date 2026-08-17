@@ -1,24 +1,33 @@
 # Gentoo test environment setup
 
 Git mirrors:
+
 - [Codeberg](https://codeberg.org/paveloom/gentoo-incus)
 - [GitHub](https://github.com/paveloom/gentoo-incus)
 - [GitLab](https://gitlab.com/paveloom-g/personal/gentoo/incus)
 
 Assumptions:
+
 - There is only one user on the system making use of this setup, the developer
-- The developer is only interested in using the [main ebuild repository](https://wiki.gentoo.org/wiki/Ebuild_repository#The_Gentoo_ebuild_repository) and the [GURU](https://wiki.gentoo.org/wiki/Project:GURU) repository
+- The developer is only interested in using the [main ebuild repository][1] and
+  the [GURU][2] repository
 - The developer has the aforementioned repositories checked out locally
-- The developer is willing to share the binary packages between the host system and guest systems
+- The developer is willing to share the binary packages between the host system
+  and guest systems
 - The developer's non-root user's UID (`id -u`) and GID (`id -g`) are 1000 both
 - The developer is using a Wayland compositor on the host system
 
+[1]: https://wiki.gentoo.org/wiki/Ebuild_repository#The_Gentoo_ebuild_repository
+[2]: https://wiki.gentoo.org/wiki/Project:GURU
+
 Requirements:
+
 - [Incus](https://linuxcontainers.org/incus/)
 
 The following commands are supposed to be run on a Gentoo host.
 
-Commands starting with `#` should be run as the root user, while commands starting with `$` should be run as a non-root user.
+Commands starting with `#` should be run as the root user, while commands
+starting with `$` should be run as a non-root user.
 
 1. As the root user, create project `gentoo`:
 
@@ -52,7 +61,8 @@ Commands starting with `#` should be run as the root user, while commands starti
       # incus config trust list
       ```
 
-   2. Add the project to the `projects` list in the trusted client configuration.
+   2. Add the project to the `projects` list in the trusted client
+      configuration.
 
       Run
 
@@ -118,7 +128,8 @@ Commands starting with `#` should be run as the root user, while commands starti
     # ./add_user.bash
     ```
 
-From here on out the developer is free to use the system container as a clean Gentoo test environment.
+From here on out the developer is free to use the system container as a clean
+Gentoo test environment.
 
 To enter the login shell as the non-root user, run
 
@@ -126,9 +137,13 @@ To enter the login shell as the non-root user, run
 $ incus exec gentoo -- su -l user
 ```
 
-# Binary packages
+## Binary packages
 
-Note that the default Portage configuration in this repository makes the package manager create binary packages and share them with the host system. See the [official guide](https://wiki.gentoo.org/wiki/Binary_package_guide) for the details on how it works.
+Note that the default Portage configuration in this repository makes the
+package manager create binary packages and share them with the host system. See
+the [official guide][3] for the details on how it works.
+
+[3]: https://wiki.gentoo.org/wiki/Binary_package_guide
 
 Here are some commands that can be useful when working on a new ebuild.
 
@@ -144,19 +159,40 @@ Build the atom without creating a binary package for it:
 # emerge --buildpkg=n atom
 ```
 
-In the case an unwanted binary package exists (but it is not merged), delete it and fix the index:
+In the case an unwanted binary package exists (but it is not merged), delete it
+and fix the index:
 
 ```console
 # rm -rf /var/cache/binpkgs/category/name/
 # emaint binhost --fix
 ```
 
-# GUI applications
+## GUI applications
 
-To make use of the host's GPU, make sure that the non-root user on the host system and the non-root user inside the container have the same UIDs (check via `id -u`) and GIDs (check via `id -g`). The configuration in this repository assumes that both numbers are equal to 1000, as this is commonly the default for the first user on most systems. The user `user` must be added after the container is created (can be done via the [`add_user.bash`](./home/root/add_user.bash) script). The GUI applications are supposed to be launched preferably via that non-root user.
+To make use of the host's GPU, make sure that the non-root user on the host
+system and the non-root user inside the container have the same UIDs (check via
+`id -u`) and GIDs (check via `id -g`). The configuration in this repository
+assumes that both numbers are equal to 1000, as this is commonly the default
+for the first user on most systems. The user `user` must be added after the
+container is created (can be done via the [`add_user.bash`][4] script). The GUI
+applications are supposed to be launched preferably via that non-root user.
 
-The configuration also assumes that the host's non-root user uses a Wayland compositor, thus assuming that the compositor is listening at the `$XDG_RUNTIME_DIR/wayland-0` socket. The value of `$XDG_RUNTIME_DIR` is assumed to be `/run/user/1000`, and this directory is bind mounted to the container by default. A custom personal initialization file for Bash (see [`.bash_profile`](./home/user/.bash_profile)) mush be copied into the container's non-root user's home directory to override the default value of that environment variable, thus making the Wayland compositor reachable from within.
+[4]: ./home/root/add_user.bash
 
-# Acknowledgements
+The configuration also assumes that the host's non-root user uses a Wayland
+compositor, thus assuming that the compositor is listening at the
+`$XDG_RUNTIME_DIR/wayland-0` socket. The value of `$XDG_RUNTIME_DIR` is assumed
+to be `/run/user/1000`, and this directory is bind mounted to the container by
+default. A custom personal initialization file for Bash (see
+[`.bash_profile`][5]) mush be copied into the container's non-root user's home
+directory to override the default value of that environment variable, thus
+making the Wayland compositor reachable from within.
 
-This set of instructions is mostly a bare bones reimplementation of the instructions on the [Incus/Gentoo Github pullrequest testing](https://wiki.gentoo.org/wiki/Incus/Gentoo_Github_pullrequest_testing) page.
+[5]: ./home/user/.bash_profile
+
+## Acknowledgements
+
+This set of instructions is mostly a bare bones reimplementation of the
+instructions on the [Incus/Gentoo Github pullrequest testing][6] page.
+
+[6]: https://wiki.gentoo.org/wiki/Incus/Gentoo_Github_pullrequest_testing
