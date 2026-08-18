@@ -141,11 +141,11 @@ $ incus exec gentoo -- su -l user
 
 Even though ebuilds in repositories are getting updated immediately on change
 in the host system, the dependency cache stored in `/var/cache/edb/dep` inside
-the container can grow stale after a while. It's not a problem for Portage
-itself as it will regenerate the dependency graph as needed. However, `eix` can
-fail to report newer versions of packages. Whenever you notice that, run
-`emerge --regen` to regenerate the Portage's cache. Then, run `eix-update` to
-update `eix`'s cache. This should solve the issue.
+the container can grow stale after a while. This can lead to Portage pulling
+older versions of packages and `eix` failing to report newer versions of
+packages. Whenever you notice that, run `emerge --regen` to regenerate the
+Portage's cache. Then, run `eix-update` to update `eix`'s cache. This should
+solve any such issues.
 
 ## Binary packages
 
