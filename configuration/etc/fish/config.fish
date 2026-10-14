@@ -6,7 +6,7 @@ set -x LESS "$LESS -i"
 set -x LESSCOLORIZER "pygmentize -f 256"
 
 # Bind `Ctrl+Backspace` to delete a word behind the cursor
-bind ctrl-backspace backward-kill-word
+bind ctrl-h backward-kill-word
 
 # Make `Ctrl+Left` and `Ctrl+Right` move between words
 bind ctrl-left prevd-or-backward-word
