@@ -10,6 +10,14 @@ devices:
     type: disk
     path: /
     pool: default
+  steve:
+    type: unix-char
+    source: /dev/steve
+    path: /dev/steve
+    uid: 555
+    gid: 556
+    mode: 660
+    required: false
   gpu:
     type: gpu
     uid: 1000
